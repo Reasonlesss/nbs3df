@@ -6,7 +6,29 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-description = "A fabric mod that converts NBS files into DiamondFire code templates"
+fun Project.git(command: String): String? {
+    return try {
+        providers.exec { commandLine(("git $command").split(" ")) }
+            .standardOutput
+            .asText
+            .get()
+            .trim()
+    } catch (_: Exception) {
+        null
+    }
+}
+
+group = "codes.reason"
+version = git("describe --tags --long")
+    ?.removePrefix("v")
+    ?.split("-")
+    ?.let { parts ->
+        val majorMinor = parts.getOrNull(0) ?: "0.0"
+        val commits = parts.getOrNull(1) ?: "0"
+        "$majorMinor.$commits"
+    }
+    ?: "0.0.0"
+description = "An open source mod for converting Noteblock Studio songs into DiamondFire Code Templates. "
 
 dependencies {
     minecraft(libs.minecraft)
@@ -32,11 +54,17 @@ tasks.shadowJar {
 
 fabricModJson {
     id = "nbs3df"
+    icon("assets/nbs3df/icon.png")
     clientEntrypoint("codes.reason.nbs3df.NBS3DF")
     depends("fabric-language-kotlin", "*")
     depends("minecraft", libs.versions.minecraft.get())
 
     author("Reasonless") {
         contact.sources = "https://github.com/Reasonless/"
+    }
+    contributor("Floophead") {
+    }
+    contributor("RedVortx") {
+        contact.sources = "https://github.com/RedVortxDev/"
     }
 }
