@@ -35,7 +35,7 @@ class NBS3DF : ClientModInitializer {
                 minecraft.toastManager.addToast(SystemToast(
                     NO_CREATIVE,
                     Component.translatable("nbs3df.toast.noCreative.title"),
-                    Component.translatable("nbs3df.toast.noCreative.description"),
+                    Component.translatable("nbs3df.toast.noCreative.description", items.size),
                 ))
                 return
             }
@@ -69,7 +69,7 @@ class NBS3DF : ClientModInitializer {
             }
             if (skipped > 0) {
                 minecraft.toastManager.addToast(SystemToast(
-                    NOT_ENOUGH_SPACE,
+                    SKIPPED_ITEMS,
                     Component.translatable("nbs3df.toast.skippedItems.title"),
                     Component.translatable("nbs3df.toast.skippedItems.description", skipped, items),
                 ))
