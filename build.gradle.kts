@@ -19,14 +19,8 @@ fun Project.git(command: String): String? {
 }
 
 group = "cloud.emilys"
-version = git("describe --tags --long")
+version = git("describe --tags --abbrev=0")
     ?.removePrefix("v")
-    ?.split("-")
-    ?.let { parts ->
-        val majorMinor = parts.getOrNull(0) ?: "0.0"
-        val commits = parts.getOrNull(1) ?: "0"
-        "$majorMinor.$commits"
-    }
     ?: "0.0.0"
 description = "An open source mod for converting Noteblock Studio songs into DiamondFire Code Templates. "
 
