@@ -1,8 +1,13 @@
 package cloud.emilys.nbs3df.song
 
 import cloud.emilys.nbs3df.util.ByteReader
+import cloud.emilys.nbs3df.util.toByteReader
+import java.nio.file.Path
+import kotlin.io.path.name
+import kotlin.io.path.nameWithoutExtension
 
 data class NBSSong(
+    val fileName: String,
     val header: SongHeader,
     val notes: Map<Int, List<SongNote>>,
     val layers: List<SongLayer>,
@@ -10,9 +15,12 @@ data class NBSSong(
     val metrics: SongMetrics
 ) {
     companion object {
+        fun parseFile(path: Path) =
+            parse(path.name, path.toFile().toByteReader())
+
         // The documentation for the NBS format can be found at:
         //     https://noteblock.studio/nbs
-        fun parse(reader: ByteReader): NBSSong {
+        fun parse(fileName: String, reader: ByteReader): NBSSong {
             var version = 0.toByte()
 
             // In version 0 of the NBS format, the first 2 bytes encode
@@ -127,6 +135,7 @@ data class NBSSong(
             )
 
             return NBSSong(
+                fileName,
                 header,
                 notes,
                 layers,

@@ -1,7 +1,9 @@
 plugins {
+    alias(libs.plugins.shadow)
     alias(libs.plugins.loom)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.resourcefactory)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 description = "A fabric mod that converts NBS files into DiamondFire code templates"
@@ -12,8 +14,20 @@ dependencies {
     modImplementation(libs.fabric.api)
     modImplementation(libs.fabric.loader)
     modImplementation(libs.fabric.language.kotlin)
-    modImplementation(libs.adventure.platform.fabric)
-    implementation(libs.adventure.api)
+    implementation(libs.serialization.json)
+}
+
+tasks.processResources {
+    from(file("data")) {
+        include("sound_names.json")
+        include("sound_files.json")
+    }
+}
+
+tasks.shadowJar {
+    relocate("kotlinx.serialization", "cloud.emilys.nbs3df.shaded.kotlinx.serialization")
+    mergeServiceFiles()
+    minimize()
 }
 
 fabricModJson {

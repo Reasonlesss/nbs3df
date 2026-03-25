@@ -1,10 +1,12 @@
 package cloud.emilys.nbs3df.song.converter
 
-import cloud.emilys.nbs3df.template.VariableItem
-import cloud.emilys.nbs3df.template.SoundItem
+import cloud.emilys.nbs3df.song.CustomInstrumentData
+import cloud.emilys.nbs3df.song.CustomInstrument
+import cloud.emilys.nbs3df.util.template.VariableItem
+import cloud.emilys.nbs3df.util.template.SoundItem
 import cloud.emilys.nbs3df.song.NBSSong
-import cloud.emilys.nbs3df.template.CodeBlock
-import cloud.emilys.nbs3df.template.createListCodeBlocks
+import cloud.emilys.nbs3df.util.template.CodeBlock
+import cloud.emilys.nbs3df.util.template.createListCodeBlocks
 
 object InstrumentConverter {
     private const val INSTRUMENTS_VARIABLE_NAME = "nbs:instruments"
@@ -131,19 +133,50 @@ object InstrumentConverter {
         )
     )
 
+    fun convertCustomInstrument(instrument: CustomInstrument): SoundItem {
+        val sound = CustomInstrumentData.findSound(instrument.soundFile)
+
+        if (sound != null) {
+            return SoundItem(
+                SoundItem.SoundData(
+                    pitch = 1.0f,
+                    vol = 2.0f,
+                    sound = sound.name,
+                    variant = sound.variantName
+                )
+            )
+        }
+
+        if (CustomInstrumentData.isSoundName(instrument.name)) {
+            return SoundItem(
+                SoundItem.SoundData(
+                    pitch = 1.0f,
+                    vol = 2.0f,
+                    sound = instrument.name
+                )
+            )
+        }
+
+        val normalized = instrument.name
+            .lowercase()
+            .replace(" ", "_")
+            .replace(Regex("[^a-z0-9_./-]"), "")
+
+        return SoundItem(
+            SoundItem.SoundData(
+                pitch = 1.0f,
+                vol = 2.0f,
+                key = "minecraft:$normalized"
+            )
+        )
+    }
+
     fun convertInstruments(song: NBSSong): List<CodeBlock> {
         val instruments = buildList {
             val vanillaCount = song.header.vanillaInstruments.toInt()
             addAll(vanillaInstruments.take(vanillaCount))
             addAll(song.instruments.map {
-                val key = "minecraft:${it.name}"
-                SoundItem(
-                    SoundItem.SoundData(
-                        pitch = 1.0f,
-                        vol = 2.0f,
-                        key = key
-                    )
-                )
+                convertCustomInstrument(it)
             })
         }
         return createListCodeBlocks(

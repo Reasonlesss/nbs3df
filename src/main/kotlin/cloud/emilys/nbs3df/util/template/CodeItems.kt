@@ -1,7 +1,11 @@
-package cloud.emilys.nbs3df.template
+package cloud.emilys.nbs3df.util.template
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import net.minecraft.client.Minecraft
+import net.minecraft.nbt.NbtOps
+import net.minecraft.util.NullOps
+import net.minecraft.world.item.ItemStack
 
 @Serializable
 sealed class ItemData
@@ -69,10 +73,20 @@ class SoundItem(override val data: SoundData) : CodeItem<SoundItem.SoundData>() 
     ) : ItemData()
 }
 
-fun number(value: String) = NumberItem(NumberItem.NumberData(value))
-fun string(value: String) = StringItem(StringItem.StringData(value))
-fun local(value: String) = VariableItem(VariableItem.VariableData(value, VariableItem.Scope.LOCAL))
-fun line(value: String) = VariableItem(VariableItem.VariableData(value, VariableItem.Scope.LINE))
-fun tag(option: String, tag: String, action: String, block: String) = BlockTagItem(BlockTagItem.BlockTagData(
-    option, tag, action, block
-))
+@Serializable
+@SerialName("item")
+class VanillaItem(override val data: VanillaItemData) : CodeItem<VanillaItem.VanillaItemData>() {
+    @Serializable
+    class VanillaItemData(
+        val item: String
+    ) : ItemData()
+}
+
+fun ItemStack.toCodeItem(): VanillaItem {
+    val registryAccess = Minecraft.getInstance().level!!.registryAccess()
+    val item = ItemStack.CODEC.encodeStart(
+        registryAccess.createSerializationContext(NbtOps.INSTANCE),
+        this
+    )
+    return VanillaItem(VanillaItem.VanillaItemData(item.orThrow.toString()))
+}

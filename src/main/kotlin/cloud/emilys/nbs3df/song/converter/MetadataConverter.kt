@@ -1,10 +1,10 @@
 package cloud.emilys.nbs3df.song.converter
 
-import cloud.emilys.nbs3df.template.Args
-import cloud.emilys.nbs3df.template.CodeBlock
-import cloud.emilys.nbs3df.template.SlotItem
-import cloud.emilys.nbs3df.template.StringItem
-import cloud.emilys.nbs3df.template.VariableItem
+import cloud.emilys.nbs3df.util.template.Args
+import cloud.emilys.nbs3df.util.template.CodeBlock
+import cloud.emilys.nbs3df.util.template.SlotItem
+import cloud.emilys.nbs3df.util.template.StringItem
+import cloud.emilys.nbs3df.util.template.VariableItem
 import kotlinx.serialization.json.Json
 
 object MetadataConverter {

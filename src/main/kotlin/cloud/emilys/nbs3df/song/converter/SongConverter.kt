@@ -1,12 +1,14 @@
 package cloud.emilys.nbs3df.song.converter
 
+import cloud.emilys.nbs3df.util.template.setCodeTemplate
 import cloud.emilys.nbs3df.song.NBSSong
 import cloud.emilys.nbs3df.song.plugin.PluginChain
 import cloud.emilys.nbs3df.song.plugin.ResamplePlugin
 import cloud.emilys.nbs3df.song.plugin.TransposeNotesPlugin
 import cloud.emilys.nbs3df.song.plugin.apply
-import cloud.emilys.nbs3df.template.CodeTemplateData
+import cloud.emilys.nbs3df.util.template.CodeTemplateData
 import cloud.emilys.nbs3df.util.chunked
+import net.minecraft.world.item.ItemStack
 
 object SongConverter {
     private const val MAJOR_VERSION = 1
@@ -19,16 +21,14 @@ object SongConverter {
         TransposeNotesPlugin
     )
 
-    fun convertSong(song: NBSSong): List<CodeTemplateData> {
+    fun convertSong(song: NBSSong): List<ItemStack> {
         val modifiedSong = pluginsToApply.apply(song)
         val chunks = SongByteEncoder.encodeSongBytes(modifiedSong)
             .chunked(BYTES_PER_CHUNK)
 
-        val function =
-            LineStarterGenerator.createLineStarter(modifiedSong)
+        val function = LineStarterGenerator.createLineStarter(modifiedSong)
         val data = SongDataConverter.convertNotes(chunks)
-        val instruments =
-            InstrumentConverter.convertInstruments(modifiedSong)
+        val instruments = InstrumentConverter.convertInstruments(modifiedSong)
 
         val metadata = SongPlayerMetadata(
             chunks = chunks.size,
@@ -49,7 +49,10 @@ object SongConverter {
                     add(convertedMetadata)
                 }
             }
-            CodeTemplateData(blocks)
+
+            val item = SongIconGenerator.makeSongIcon(song, index + 1, data.size)
+            item.setCodeTemplate(song.header.meta.author, CodeTemplateData(blocks).encode())
+            item
         }
     }
 }

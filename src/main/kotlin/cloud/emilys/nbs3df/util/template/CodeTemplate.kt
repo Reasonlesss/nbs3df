@@ -1,4 +1,4 @@
-package cloud.emilys.nbs3df.template
+package cloud.emilys.nbs3df.util.template
 
 import cloud.emilys.nbs3df.util.compress
 import cloud.emilys.nbs3df.util.toBase64

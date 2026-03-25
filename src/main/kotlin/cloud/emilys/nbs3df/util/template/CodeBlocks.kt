@@ -1,4 +1,4 @@
-package cloud.emilys.nbs3df.template
+package cloud.emilys.nbs3df.util.template
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

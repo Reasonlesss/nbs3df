@@ -1,10 +1,11 @@
 package cloud.emilys.nbs3df.song.converter
 
 import cloud.emilys.nbs3df.song.NBSSong
-import cloud.emilys.nbs3df.template.Args
-import cloud.emilys.nbs3df.template.BlockTagItem
-import cloud.emilys.nbs3df.template.CodeBlock
-import cloud.emilys.nbs3df.template.SlotItem
+import cloud.emilys.nbs3df.util.template.Args
+import cloud.emilys.nbs3df.util.template.BlockTagItem
+import cloud.emilys.nbs3df.util.template.CodeBlock
+import cloud.emilys.nbs3df.util.template.SlotItem
+import cloud.emilys.nbs3df.util.template.toCodeItem
 
 object LineStarterGenerator {
     private val hiddenTag = BlockTagItem(
@@ -22,6 +23,10 @@ object LineStarterGenerator {
             data = song.header.meta.name,
             args = Args(
                 items = listOf(
+                    SlotItem(
+                        item = SongIconGenerator.makeSongIcon(song).toCodeItem(),
+                        slot = 0
+                    ),
                     SlotItem(
                         item = hiddenTag,
                         slot = 26

@@ -1,9 +1,9 @@
 package cloud.emilys.nbs3df.song.converter
 
-import cloud.emilys.nbs3df.template.CodeBlock
-import cloud.emilys.nbs3df.template.StringItem
-import cloud.emilys.nbs3df.template.VariableItem
-import cloud.emilys.nbs3df.template.createListCodeBlocks
+import cloud.emilys.nbs3df.util.template.CodeBlock
+import cloud.emilys.nbs3df.util.template.StringItem
+import cloud.emilys.nbs3df.util.template.VariableItem
+import cloud.emilys.nbs3df.util.template.createListCodeBlocks
 import cloud.emilys.nbs3df.util.compress
 import cloud.emilys.nbs3df.util.toBase64
 
@@ -27,7 +27,7 @@ object SongDataConverter {
         }
         return createListCodeBlocks(
             variableItem = dataVariable,
-            chunkSize = 17,
+            chunkSize = 15,
             codeItems = mappedChunks
         )
     }
