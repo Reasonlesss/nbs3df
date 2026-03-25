@@ -22,7 +22,7 @@ group = "codes.reason"
 version = git("describe --tags --abbrev=0")
     ?.removePrefix("v")
     ?: "0.0.0"
-description = "An open source mod for converting Noteblock Studio songs into DiamondFire Code Templates. "
+description = "An open source mod for converting Noteblock Studio songs into DiamondFire Code Templates."
 
 dependencies {
     minecraft(libs.minecraft)
