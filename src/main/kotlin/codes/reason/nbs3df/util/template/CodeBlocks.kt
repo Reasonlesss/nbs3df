@@ -1,4 +1,4 @@
-package codes.reason.nbs3df.template
+package codes.reason.nbs3df.util.template
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

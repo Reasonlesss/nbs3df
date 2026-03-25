@@ -1,12 +1,14 @@
 package codes.reason.nbs3df.song.converter
 
+import codes.reason.nbs3df.util.template.setCodeTemplate
 import codes.reason.nbs3df.song.NBSSong
 import codes.reason.nbs3df.song.plugin.PluginChain
 import codes.reason.nbs3df.song.plugin.ResamplePlugin
 import codes.reason.nbs3df.song.plugin.TransposeNotesPlugin
 import codes.reason.nbs3df.song.plugin.apply
-import codes.reason.nbs3df.template.CodeTemplateData
+import codes.reason.nbs3df.util.template.CodeTemplateData
 import codes.reason.nbs3df.util.chunked
+import net.minecraft.world.item.ItemStack
 
 object SongConverter {
     private const val MAJOR_VERSION = 1
@@ -19,16 +21,14 @@ object SongConverter {
         TransposeNotesPlugin
     )
 
-    fun convertSong(song: NBSSong): List<CodeTemplateData> {
+    fun convertSong(song: NBSSong): List<ItemStack> {
         val modifiedSong = pluginsToApply.apply(song)
         val chunks = SongByteEncoder.encodeSongBytes(modifiedSong)
             .chunked(BYTES_PER_CHUNK)
 
-        val function =
-            LineStarterGenerator.createLineStarter(modifiedSong)
+        val function = LineStarterGenerator.createLineStarter(modifiedSong)
         val data = SongDataConverter.convertNotes(chunks)
-        val instruments =
-            InstrumentConverter.convertInstruments(modifiedSong)
+        val instruments = InstrumentConverter.convertInstruments(modifiedSong)
 
         val metadata = SongPlayerMetadata(
             chunks = chunks.size,
@@ -49,7 +49,10 @@ object SongConverter {
                     add(convertedMetadata)
                 }
             }
-            CodeTemplateData(blocks)
+
+            val item = SongIconGenerator.makeSongIcon(song, index + 1, data.size)
+            item.setCodeTemplate(song.header.meta.author, CodeTemplateData(blocks).encode())
+            item
         }
     }
 }

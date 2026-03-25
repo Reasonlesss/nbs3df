@@ -1,0 +1,23 @@
+{
+    "nbs3df.screen.import.cancel": "Cancel",
+    "nbs3df.screen.import.homeDirectory": "Jump to home directory",
+    "nbs3df.screen.import.parentDirectory": "../",
+    "nbs3df.screen.import.refresh": "Refresh current directory",
+    "nbs3df.screen.import.selectSong": "Import this song",
+    "nbs3df.screen.import.showHiddenFiles": "Show hidden files",
+    "nbs3df.screen.import.startPreview": "Start previewing this song",
+    "nbs3df.screen.import.loadingPreview": "Loading preview...",
+    "nbs3df.screen.import.stopPreview": "Stop previewing the current song",
+    "nbs3df.screen.import.title": "Select a song to import",
+    "nbs3df.screen.copyright.title": "Copyright Notice!",
+    "nbs3df.screen.copyright.description": ".nbs files are the property of their creators. Please make sure you have permission from %s before using or sharing %s!",
+    "nbs3df.screen.copyright.yes": "I understand!",
+    "nbs3df.screen.copyright.no": "Nevermind",
+    "nbs3df.screen.copyright.unknownCreator": "the creator of %s",
+    "nbs3df.toast.noCreative.title": "You are not in creative mode!",
+    "nbs3df.toast.noCreative.description": "Could not give you %s items as you are in creative mode.",
+    "nbs3df.toast.notEnoughSpace.title": "Not enough inventory space!",
+    "nbs3df.toast.notEnoughSpace.description": "You do not have enough space for %s more items.",
+    "nbs3df.toast.skippedItems.title": "Skipped a few item(s)",
+    "nbs3df.toast.skippedItems.description": "Skipped %s/%s item(s) that you already have."
+}

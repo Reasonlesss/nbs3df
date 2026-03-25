@@ -6,6 +6,7 @@ coroutines = "1.10.2"
 resourcefactory = "1.3.0"
 adventure = "4.17.0"
 adventure-platform-fabric = "6.8.0"
+shadow = "8.1.1"
 
 # Minecraft version related values
 # These values can be found at https://fabricmc.net/develop/
@@ -38,3 +39,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 loom = { id = "fabric-loom", version.ref = "loom" }
 resourcefactory = { id = "xyz.jpenilla.resource-factory-fabric-convention", version.ref = "resourcefactory" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }

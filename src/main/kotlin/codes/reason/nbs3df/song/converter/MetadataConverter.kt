@@ -1,10 +1,10 @@
 package codes.reason.nbs3df.song.converter
 
-import codes.reason.nbs3df.template.Args
-import codes.reason.nbs3df.template.CodeBlock
-import codes.reason.nbs3df.template.SlotItem
-import codes.reason.nbs3df.template.StringItem
-import codes.reason.nbs3df.template.VariableItem
+import codes.reason.nbs3df.util.template.Args
+import codes.reason.nbs3df.util.template.CodeBlock
+import codes.reason.nbs3df.util.template.SlotItem
+import codes.reason.nbs3df.util.template.StringItem
+import codes.reason.nbs3df.util.template.VariableItem
 import kotlinx.serialization.json.Json
 
 object MetadataConverter {

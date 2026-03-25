@@ -1,4 +1,4 @@
-package codes.reason.nbs3df.template
+package codes.reason.nbs3df.util.template
 
 import codes.reason.nbs3df.util.compress
 import codes.reason.nbs3df.util.toBase64

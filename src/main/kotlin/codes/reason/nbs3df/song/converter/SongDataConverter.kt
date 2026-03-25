@@ -1,9 +1,9 @@
 package codes.reason.nbs3df.song.converter
 
-import codes.reason.nbs3df.template.CodeBlock
-import codes.reason.nbs3df.template.StringItem
-import codes.reason.nbs3df.template.VariableItem
-import codes.reason.nbs3df.template.createListCodeBlocks
+import codes.reason.nbs3df.util.template.CodeBlock
+import codes.reason.nbs3df.util.template.StringItem
+import codes.reason.nbs3df.util.template.VariableItem
+import codes.reason.nbs3df.util.template.createListCodeBlocks
 import codes.reason.nbs3df.util.compress
 import codes.reason.nbs3df.util.toBase64
 
@@ -27,7 +27,7 @@ object SongDataConverter {
         }
         return createListCodeBlocks(
             variableItem = dataVariable,
-            chunkSize = 17,
+            chunkSize = 15,
             codeItems = mappedChunks
         )
     }
