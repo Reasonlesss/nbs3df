@@ -20,7 +20,7 @@ object LineStarterGenerator {
     fun createLineStarter(song: NBSSong): CodeBlock {
         return CodeBlock(
             block = "func",
-            data = song.header.meta.name,
+            data = song.header.meta.name.ifEmpty { song.fileName },
             args = Args(
                 items = listOf(
                     SlotItem(

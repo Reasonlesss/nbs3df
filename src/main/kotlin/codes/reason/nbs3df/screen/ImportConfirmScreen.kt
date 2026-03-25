@@ -17,7 +17,7 @@ object ImportConfirmScreen {
         val author = if (song.header.meta.author.isNotEmpty()) {
             Component.literal(song.header.meta.author)
         } else {
-            Component.translatable("nbs3df.screen.copyright.unknownCreator")
+            Component.translatable("nbs3df.screen.copyright.unknownCreator", songName)
         }.important()
 
         Minecraft.getInstance().setScreen(ConfirmScreen(
