@@ -31,6 +31,10 @@ object SongConverter {
         val instruments = InstrumentConverter.convertInstruments(modifiedSong)
 
         val metadata = SongPlayerMetadata(
+            name = song.header.meta.name.ifEmpty { song.fileName },
+            fileName = song.fileName,
+            author = song.header.meta.author,
+            originalAuthor = song.header.meta.originalAuthor,
             chunks = chunks.size,
             notes = modifiedSong.notes.values.sumOf { it.size },
             bytesPerNote = JUMPS_PER_NOTE,

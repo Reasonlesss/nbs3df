@@ -20,6 +20,11 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class SongPlayerMetadata(
+    val fileName: String,
+    val name: String,
+    val author: String,
+    @SerialName("original_author")
+    val originalAuthor: String,
     @SerialName("major_version")
     val majorVersion: Int,
     val chunks: Int,
