@@ -14,7 +14,7 @@ object SongConverter {
     private const val MAJOR_VERSION = 1
     private const val BYTES_PER_CHUNK = 10_000
     private const val TARGET_TPS = 20.0
-    private const val JUMPS_PER_NOTE = 7
+    private const val JUMPS_PER_NOTE = 8
 
     private val pluginsToApply: PluginChain = listOf(
         ResamplePlugin(targetTempo = TARGET_TPS),
@@ -38,7 +38,8 @@ object SongConverter {
             chunks = chunks.size,
             notes = modifiedSong.notes.values.sumOf { it.size },
             bytesPerNote = JUMPS_PER_NOTE,
-            majorVersion = MAJOR_VERSION
+            majorVersion = MAJOR_VERSION,
+            layers = song.layers.map { it.name }
         )
 
         val convertedMetadata =
