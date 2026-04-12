@@ -37,7 +37,7 @@ object SongByteEncoder {
                     writer.writeShort(calculatePitchValue(note.key.toInt(), note.pitch))
                 }
                 writer.writeByte((((note.panning + layer.stereo) / 2) - 100) * -1)
-                writer.writeByte(note.layer)
+                writer.writeByte(song.compressedLayerIndexs[note.layer])
             }
         }
 

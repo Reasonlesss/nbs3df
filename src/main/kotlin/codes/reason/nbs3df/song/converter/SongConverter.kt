@@ -39,7 +39,7 @@ object SongConverter {
             notes = modifiedSong.notes.values.sumOf { it.size },
             bytesPerNote = JUMPS_PER_NOTE,
             majorVersion = MAJOR_VERSION,
-            layers = song.layers.map { it.name }
+            layers = song.layerNames
         )
 
         val convertedMetadata =
