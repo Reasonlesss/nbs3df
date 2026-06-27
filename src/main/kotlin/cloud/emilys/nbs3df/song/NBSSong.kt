@@ -12,7 +12,9 @@ data class NBSSong(
     val notes: Map<Int, List<SongNote>>,
     val layers: List<SongLayer>,
     val instruments: List<CustomInstrument>,
-    val metrics: SongMetrics
+    val metrics: SongMetrics,
+    val layerNames: List<String>,
+    val compressedLayerIndexs: List<Int>
 ) {
     companion object {
         fun parseFile(path: Path) =
@@ -117,6 +119,9 @@ data class NBSSong(
                 )
             }
 
+            var layerNames = layers.map { it.name }.distinct()
+            var compLayerIdx = layers.map { layerNames.indexOf(it.name) }
+
             // Parse custom instruments
             val customInstruments = List(reader.readUByte()) {
                 CustomInstrument(
@@ -140,7 +145,9 @@ data class NBSSong(
                 notes,
                 layers,
                 customInstruments,
-                metrics
+                metrics,
+                layerNames,
+                compLayerIdx
             )
         }
     }

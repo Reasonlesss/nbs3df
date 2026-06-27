@@ -30,5 +30,6 @@ data class SongPlayerMetadata(
     val chunks: Int,
     val notes: Int,
     @SerialName("bytes_per_note")
-    val bytesPerNote: Int
+    val bytesPerNote: Int,
+    val layers: List<String>
 )
