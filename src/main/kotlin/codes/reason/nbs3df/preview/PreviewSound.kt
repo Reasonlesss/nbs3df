@@ -28,7 +28,11 @@ data class PreviewSound(
             vanillaSound("minecraft:block.note_block.didgeridoo"),
             vanillaSound("minecraft:block.note_block.bit"),
             vanillaSound("minecraft:block.note_block.banjo"),
-            vanillaSound("minecraft:block.note_block.pling")
+            vanillaSound("minecraft:block.note_block.pling"),
+            vanillaSound("minecraft:block.note_block.trumpet"),
+            vanillaSound("minecraft:block.note_block.trumpet_exposed"),
+            vanillaSound("minecraft:block.note_block.trumpet_weathered"),
+            vanillaSound("minecraft:block.note_block.trumpet_oxidized"),
         )
 
         private fun vanillaSound(name: String) : PreviewSound {
@@ -36,7 +40,7 @@ data class PreviewSound(
         }
 
         fun fromCustomInstrument(instrument: CustomInstrument) : PreviewSound? {
-            val sound = CustomInstrumentData.findSound(instrument.soundFile)
+            val sound = CustomInstrumentData.findSoundFile(instrument.soundFile)
             if (sound != null) {
                 val identifier = Identifier.parse(sound.key)
                 val seed = sound.seed

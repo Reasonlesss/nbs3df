@@ -32,7 +32,7 @@ class NBS3DF : ClientModInitializer {
             var skipped = 0
             var givenItems = 0
             if (!player.isCreative) {
-                minecraft.toastManager.addToast(SystemToast(
+                minecraft.gui.toastManager().addToast(SystemToast(
                     NO_CREATIVE,
                     Component.translatable("nbs3df.toast.noCreative.title"),
                     Component.translatable("nbs3df.toast.noCreative.description", items.size),
@@ -49,7 +49,7 @@ class NBS3DF : ClientModInitializer {
                 val slot = player.inventory.freeSlot
 
                 if (slot == -1) {
-                    minecraft.toastManager.addToast(SystemToast(
+                    minecraft.gui.toastManager().addToast(SystemToast(
                         NOT_ENOUGH_SPACE,
                         Component.translatable("nbs3df.toast.notEnoughSpace.title"),
                         Component.translatable("nbs3df.toast.notEnoughSpace.description", items.size - givenItems),
@@ -68,7 +68,7 @@ class NBS3DF : ClientModInitializer {
                 givenItems++
             }
             if (skipped > 0) {
-                minecraft.toastManager.addToast(SystemToast(
+                minecraft.gui.toastManager().addToast(SystemToast(
                     SKIPPED_ITEMS,
                     Component.translatable("nbs3df.toast.skippedItems.title"),
                     Component.translatable("nbs3df.toast.skippedItems.description", skipped, items),
@@ -97,7 +97,7 @@ class NBS3DF : ClientModInitializer {
                     .then(LiteralArgumentBuilder.literal<FabricClientCommandSource>("import")
                         .executes {
                             Minecraft.getInstance().execute {
-                                Minecraft.getInstance().setScreen(FileNavigatorScreen(FabricLoader.getInstance().gameDir))
+                                Minecraft.getInstance().gui.setScreen(FileNavigatorScreen(FabricLoader.getInstance().gameDir))
                             }
                             1
                         })

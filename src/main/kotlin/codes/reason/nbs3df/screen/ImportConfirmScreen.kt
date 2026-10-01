@@ -20,9 +20,9 @@ object ImportConfirmScreen {
             Component.translatable("nbs3df.screen.copyright.unknownCreator", songName)
         }.important()
 
-        Minecraft.getInstance().setScreen(ConfirmScreen(
+        Minecraft.getInstance().gui.setScreen(ConfirmScreen(
             { accepted ->
-                Minecraft.getInstance().setScreen(null)
+                Minecraft.getInstance().gui.setScreen(null)
                 if (accepted) {
                     NBS3DF.giveIfNotPresent(items)
                 }

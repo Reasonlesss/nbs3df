@@ -31,7 +31,9 @@ object CustomInstrumentData {
 
     fun isSoundName(name: String) = name in names
 
-    fun findSound(path: String): SoundFileInfo? {
+    fun findSoundKey(name: String) = names[name]
+
+    fun findSoundFile(path: String): SoundFileInfo? {
         val pathWithoutExt = path.removeSuffix(".ogg")
         val components = pathWithoutExt.split('/', '\\').filter { it.isNotEmpty() }
         if (components.isEmpty()) return null
