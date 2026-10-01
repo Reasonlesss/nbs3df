@@ -23,136 +23,166 @@ object InstrumentConverter {
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Harp"
+                sound = "minecraft:block.note_block.harp"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Bass"
+                sound = "minecraft:block.note_block.bass"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Bass Drum"
+                sound = "minecraft:block.note_block.basedrum"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Snare Drum"
+                sound = "minecraft:block.note_block.snare"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Hat"
+                sound = "minecraft:block.note_block.hat"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Guitar"
+                sound = "minecraft:block.note_block.guitar"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Flute"
+                sound = "minecraft:block.note_block.flute"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Bell"
+                sound = "minecraft:block.note_block.bell"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Chime"
+                sound = "minecraft:block.note_block.chime"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Xylophone"
+                sound = "minecraft:block.note_block.xylophone"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Iron Xylophone"
+                sound = "minecraft:block.note_block.iron_xylophone"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Cow Bell"
+                sound = "minecraft:block.note_block.cow_bell"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Didgeridoo"
+                sound = "minecraft:block.note_block.didgeridoo"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Bit"
+                sound = "minecraft:block.note_block.bit"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Banjo"
+                sound = "minecraft:block.note_block.banjo"
             )
         ),
         SoundItem(
             SoundItem.SoundData(
                 1.0f,
                 2.0f,
-                sound = "Pling"
+                sound = "minecraft:block.note_block.pling"
+            )
+        ),
+        SoundItem(
+            data = SoundItem.SoundData(
+                pitch = 1.0f,
+                vol = 2.0f,
+                sound = "minecraft:block.note_block.trumpet"
+            )
+        ),
+        SoundItem(
+            data = SoundItem.SoundData(
+                pitch = 1.0f,
+                vol = 2.0f,
+                sound = "minecraft:block.note_block.trumpet_exposed"
+            )
+        ),
+        SoundItem(
+            data = SoundItem.SoundData(
+                pitch = 1.0f,
+                vol = 2.0f,
+                sound = "minecraft:block.note_block.trumpet_weathered"
+            )
+        ),
+        SoundItem(
+            data = SoundItem.SoundData(
+                pitch = 1.0f,
+                vol = 2.0f,
+                sound = "minecraft:block.note_block.trumpet_oxidized"
             )
         )
     )
 
     fun convertCustomInstrument(instrument: CustomInstrument): SoundItem {
-        val sound = CustomInstrumentData.findSound(instrument.soundFile)
+        val soundFile = CustomInstrumentData.findSoundFile(instrument.soundFile)
 
-        if (sound != null) {
+        if (soundFile != null) {
             return SoundItem(
                 SoundItem.SoundData(
                     pitch = 1.0f,
                     vol = 2.0f,
-                    sound = sound.name,
-                    variant = sound.variantName
+                    sound = soundFile.key,
+                    variant = soundFile.variantName
                 )
             )
         }
 
-        if (CustomInstrumentData.isSoundName(instrument.name)) {
+        val soundKey = CustomInstrumentData.findSoundKey(instrument.name)
+
+        if (soundKey != null) {
             return SoundItem(
                 SoundItem.SoundData(
                     pitch = 1.0f,
                     vol = 2.0f,
-                    sound = instrument.name
+                    sound = soundKey
                 )
             )
         }
@@ -166,7 +196,7 @@ object InstrumentConverter {
             SoundItem.SoundData(
                 pitch = 1.0f,
                 vol = 2.0f,
-                key = "minecraft:$normalized"
+                sound = "minecraft:$normalized"
             )
         )
     }

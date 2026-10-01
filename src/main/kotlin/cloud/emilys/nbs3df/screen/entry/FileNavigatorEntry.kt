@@ -1,7 +1,7 @@
 package cloud.emilys.nbs3df.screen.entry
 
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.AbstractButton
 import net.minecraft.client.gui.components.ContainerObjectSelectionList
 import net.minecraft.client.gui.components.StringWidget
@@ -32,8 +32,8 @@ abstract class FileNavigatorEntry : ContainerObjectSelectionList.Entry<FileNavig
 
     private val textWidget = StringWidget(Component.empty(), Minecraft.getInstance().font)
 
-    override fun renderContent(
-        graphics: GuiGraphics,
+    override fun extractContent(
+        graphics: GuiGraphicsExtractor,
         mouseX: Int,
         mouseY: Int,
         hovered: Boolean,
@@ -53,7 +53,7 @@ abstract class FileNavigatorEntry : ContainerObjectSelectionList.Entry<FileNavig
         this.textWidget.x = this.x + iconWidth + SPACING
         this.textWidget.y = contentY
         this.textWidget.message = this.name
-        this.textWidget.render(graphics, mouseX, mouseY, delta)
+        this.textWidget.extractRenderState(graphics, mouseX, mouseY, delta)
 
         val icon = this.icon
         if (icon != null) {
@@ -66,7 +66,7 @@ abstract class FileNavigatorEntry : ContainerObjectSelectionList.Entry<FileNavig
         val buttonY = this.y + (ENTRY_HEIGHT - BUTTON_SIZE) / 2
         for (button in this.buttons.reversed()) {
             button.setPosition(buttonX, buttonY)
-            button.render(graphics, mouseX, mouseY, delta)
+            button.extractRenderState(graphics, mouseX, mouseY, delta)
             buttonX -= BUTTON_SIZE + SPACING
         }
     }

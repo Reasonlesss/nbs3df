@@ -1,5 +1,4 @@
 plugins {
-    alias(libs.plugins.shadow)
     alias(libs.plugins.loom)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.resourcefactory)
@@ -26,11 +25,10 @@ description = "An open source mod for converting Noteblock Studio songs into Dia
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.officialMojangMappings())
-    modImplementation(libs.fabric.api)
-    modImplementation(libs.fabric.loader)
-    modImplementation(libs.fabric.language.kotlin)
-    implementation(libs.serialization.json)
+    implementation(libs.fabric.api)
+    implementation(libs.fabric.loader)
+    implementation(libs.fabric.language.kotlin)
+    include(libs.serialization.json)
 }
 
 tasks.processResources {
@@ -38,13 +36,6 @@ tasks.processResources {
         include("sound_names.json")
         include("sound_files.json")
     }
-}
-
-
-tasks.shadowJar {
-    relocate("kotlinx.serialization", "cloud.emilys.nbs3df.shaded.kotlinx.serialization")
-    mergeServiceFiles()
-    minimize()
 }
 
 fabricModJson {

@@ -13,6 +13,7 @@ import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.Tooltip
 import net.minecraft.client.input.MouseButtonEvent
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextColor
 import net.minecraft.resources.Identifier
 import java.nio.file.Path
 import java.util.concurrent.CompletableFuture
@@ -22,10 +23,10 @@ import kotlin.io.path.nameWithoutExtension
 class SongNavigatorEntry(private val screen: FileNavigatorScreen, private val path: Path) : FileNavigatorEntry() {
 
     companion object {
-        val PLAY_BUTTON_TEXT = Component.literal("▶").withColor(ChatFormatting.GREEN.color!!)
-        val LOADING_BUTTON_TEXT = Component.literal("⌚").withColor(ChatFormatting.YELLOW.color!!)
-        val STOP_BUTTON_TEXT = Component.literal("⏹").withColor(ChatFormatting.RED.color!!)
-        val IMPORT_BUTTON_TEXT = Component.literal("↓").withColor(ChatFormatting.DARK_AQUA.color!!)
+        val PLAY_BUTTON_TEXT = Component.literal("▶").withColor(TextColor.GREEN)
+        val LOADING_BUTTON_TEXT = Component.literal("⌚").withColor(TextColor.YELLOW)
+        val STOP_BUTTON_TEXT = Component.literal("⏹").withColor(TextColor.RED)
+        val IMPORT_BUTTON_TEXT = Component.literal("↓").withColor(TextColor.DARK_AQUA)
 
         val PLAY_BUTTON_TOOLTIP = Component.translatable("nbs3df.screen.import.startPreview")
         val STOP_BUTTON_TOOLTIP = Component.translatable("nbs3df.screen.import.stopPreview")

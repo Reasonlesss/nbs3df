@@ -1,5 +1,6 @@
 package cloud.emilys.nbs3df.util.template
 
+import kotlinx.serialization.EncodeDefault
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import net.minecraft.client.Minecraft
@@ -11,13 +12,20 @@ import net.minecraft.world.item.ItemStack
 sealed class ItemData
 
 @Serializable
-sealed class CodeItem<T : ItemData> {
+sealed class CodeItem<T : ItemData>() {
     abstract val data: T
+
+    @EncodeDefault
+    abstract val version: Int
+
 }
 
 @Serializable
 @SerialName("txt")
 class StringItem(override val data: StringData) : CodeItem<StringItem.StringData>() {
+    @EncodeDefault
+    override val version: Int = 0
+
     @Serializable
     class StringData(val name: String) : ItemData()
 }
@@ -25,6 +33,9 @@ class StringItem(override val data: StringData) : CodeItem<StringItem.StringData
 @Serializable
 @SerialName("num")
 class NumberItem(override val data: NumberData) : CodeItem<NumberItem.NumberData>() {
+    @EncodeDefault
+    override val version: Int = 0
+
     @Serializable
     class NumberData(val name: String) : ItemData()
 }
@@ -32,6 +43,9 @@ class NumberItem(override val data: NumberData) : CodeItem<NumberItem.NumberData
 @Serializable
 @SerialName("var")
 class VariableItem(override val data: VariableData) : CodeItem<VariableItem.VariableData>() {
+    @EncodeDefault
+    override val version: Int = 0
+
     @Serializable
     class VariableData(val name: String, val scope: Scope) : ItemData()
 
@@ -51,6 +65,9 @@ class VariableItem(override val data: VariableData) : CodeItem<VariableItem.Vari
 @Serializable
 @SerialName("bl_tag")
 class BlockTagItem(override val data: BlockTagData) : CodeItem<BlockTagItem.BlockTagData>() {
+    @EncodeDefault
+    override val version: Int = 0
+
     @Serializable
     class BlockTagData(
         val option: String,
@@ -63,6 +80,12 @@ class BlockTagItem(override val data: BlockTagData) : CodeItem<BlockTagItem.Bloc
 @Serializable
 @SerialName("snd")
 class SoundItem(override val data: SoundData) : CodeItem<SoundItem.SoundData>() {
+    @EncodeDefault
+    override val version: Int = 1
+
+    @EncodeDefault
+    val mappingVersion = 0;
+
     @Serializable
     class SoundData(
         val pitch: Float,
@@ -76,6 +99,9 @@ class SoundItem(override val data: SoundData) : CodeItem<SoundItem.SoundData>() 
 @Serializable
 @SerialName("item")
 class VanillaItem(override val data: VanillaItemData) : CodeItem<VanillaItem.VanillaItemData>() {
+    @EncodeDefault
+    override val version: Int = 0
+
     @Serializable
     class VanillaItemData(
         val item: String

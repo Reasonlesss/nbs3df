@@ -7,7 +7,7 @@ import cloud.emilys.nbs3df.screen.entry.SongNavigatorEntry
 import cloud.emilys.nbs3df.util.important
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.Checkbox
 import net.minecraft.client.gui.components.StringWidget
@@ -139,14 +139,14 @@ class FileNavigatorScreen(path: Path) : Screen(
         this.repositionElements()
     }
 
-    override fun render(
-        guiGraphics: GuiGraphics,
+    override fun extractRenderState(
+        guiGraphics: GuiGraphicsExtractor,
         i: Int,
         j: Int,
         f: Float
     ) {
         this.stopButton.visible = SongPreviewHandler.isPlaying()
-        super.render(guiGraphics, i, j, f)
+        super.extractRenderState(guiGraphics, i, j, f)
     }
 
     override fun repositionElements() {
