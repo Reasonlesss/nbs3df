@@ -5,10 +5,10 @@ resourcefactory = "1.3.0"
 
 # Minecraft version related values
 # These values can be found at https://fabricmc.net/develop/
-minecraft = "26.2"
+minecraft = "26.3"
 fabric-loader = "0.19.5"
 loom = "1.18-SNAPSHOT"
-fabric-api = "0.161.0+26.2"
+fabric-api = "0.165.0+26.3"
 fabric-language-kotlin = "1.14.1+kotlin.2.4.20"
 
 [libraries]
